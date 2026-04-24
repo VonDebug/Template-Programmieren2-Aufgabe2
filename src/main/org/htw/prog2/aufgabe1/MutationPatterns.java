@@ -31,6 +31,10 @@ public class MutationPatterns {
 
         while ((line = in.readLine()) != null) {
 
+            if(line.startsWith("#")){
+                continue;
+            }
+
             if(line.contains("\"Mutation")) {
 
                 if (!line.startsWith(definitionTemplate)) {
@@ -50,7 +54,7 @@ public class MutationPatterns {
                     }
                     secondLineisDefinition = true;
                     lengthOfDefinitionLine = (line.split(";")).length;
-                    mutationpatternList.add(line);
+
 
 
 
@@ -63,7 +67,7 @@ public class MutationPatterns {
                     throw new FileFormatException("All lines in a CSV file must have the same number of elements.");
                 }
                 else{
-                    mutationpatternList.add(line);
+                    this.mutationpatternList.add(line);
                     if(!secondLineisDefinition){
                         throw new FileFormatException("First line of mutation pattern CSV file must be a header.");
                     }
@@ -83,7 +87,8 @@ public class MutationPatterns {
      * @return Anzahl der eingelesenen Mutationspattern
      */
     public int getNumberOfMutations() {
-        return 0;
+
+        return this.mutationpatternList.size();
     }
 
     /**

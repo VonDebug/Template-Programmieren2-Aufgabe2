@@ -46,5 +46,20 @@ public class HIVDiagnostics {
 
     public static void main(String[] args) {
 
+        CommandLine cli = parseOptions(args);
+        if(cli != null) {
+            try {
+
+                SeqFile seqFile = new SeqFile(cli.getOptionValue("p"));
+                SeqFile referenceFile = new SeqFile(cli.getOptionValue("r"));
+                MutationPatterns mutationPatterns = new MutationPatterns(cli.getOptionValue("m"));
+                System.out.println("Eingelesene Mutationen: " + mutationPatterns.getNumberOfMutations());
+                System.out.println("Länge der eingelesenen Referenzsequenz: " + referenceFile.getFirstSequence().length() + " Aminosäuren");
+                System.out.println("Anzahl der eingelesenen Patientensequenzen: " + seqFile.getNumberOfSequences());
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
